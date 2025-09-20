@@ -90,7 +90,7 @@ There are roughly 57G, 22G, 5.5G, 47G, and 40G in `2011_09_26/`, `2011_09_28/`, 
 ```
 `waymo_records/train/` should have 798 files with suffix `*_with_camera_labels.tfrecord` totalling roughly 760G and `waymo_records/val/` should have 202 files with suffix `*_with_camera_labels.tfrecord` totalling roughly 192G.
 
-🔹 Please refer to [Dynamo-Depth](https://dynamo-depth.github.io) for `process the Waymo dataset`
+🔹 ` Please see the “Prepare_data” section of [Dynamo-Depth](https://dynamo-depth.github.io) for more details.
 
 ## 💾 Cityscapes Dataset
 
@@ -114,7 +114,7 @@ python prepare_train_data.py \
     --num_threads 8
 ```
 
-Once preprocess the Cityscapes dataset, you should be able to obtain following directoy sturcture.
+Once preprocess the Cityscapes dataset, you should be able to obtain the following directory structure.
 ```
 </PATH/TO/cityscapes_preprocesses>
   ├── aachen
