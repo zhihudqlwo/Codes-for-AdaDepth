@@ -153,12 +153,6 @@ cd ../..
 ## Training
 Training can be done with a single GPU or multiple GPUs (via `torch.nn.parallel.DistributedDataParallel`)
 
-The following are a set of shared arguments to use with any training method.
-- `-n <EXP_NAME>` indicates the name of the experiment.
-- `-d <DATASET_NAME>` specifies which dataset (`"waymo"`, `"nuscenes"`, or `"kitti"`) to train on, and the default is `"waymo"`.
-- `-l </PATH/TO/MODEL/CKPT>` indicates which model checkpoint to be load before training.
-- `--depth_model <MODEL_NAME>` specifies which depth model (`"litemono"` or `"monodepthv2"`) to train, with default `"litemono"`.
-
 ### ⏳ Single GPU Training
 For instance, to train w/ 1 GPU on Cityscapes Dataset from scratch:
 ```
@@ -170,7 +164,6 @@ For instance, to train w/ 2 GPUs on Waymo Dataset
 ```
 CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.launch --nproc_per_node=2 train.py --data_path /path-to-cityscapes  --dataset cityscapes --model_name model_name --width 512 --height 192 --freeze_teacher_epoch 15 --train_ref_epoch 20 --train_rigid_flow_epoch 15 --model_choice litemono --model_choicee_ref litemono --model lite-mono --model_ref lite-mono-8m
 ```
-
 
 ## Evaluation
 Scripts for evaluation are found in `eval/`, including [depth](eval/depth.py), [motion segmentation](eval/motion_segmentation.py), [odometry](eval/odometry.py), and [visualization](eval/visualize.py).
