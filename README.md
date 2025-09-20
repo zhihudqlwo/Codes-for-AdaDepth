@@ -183,23 +183,13 @@ The following are a set of shared arguments to use with any of the evaluation sc
 ```
 ## === Missing checkpoints will be downloaded automatically === ##
 
-python3 eval/depth.py -l ckpt/W_Dynamo-Depth                                  ## please fill out the form for ckpt!!
-python3 eval/depth.py -l ckpt/W_Dynamo-Depth_MD2 --depth_model monodepthv2    ## please fill out the form for ckpt!!
-python3 eval/depth.py -l ckpt/N_Dynamo-Depth -d nuscenes
-python3 eval/depth.py -l ckpt/N_Dynamo-Depth_MD2 --depth_model monodepthv2 -d nuscenes
-python3 eval/depth.py -l ckpt/K_Dynamo-Depth -d kitti
-python3 eval/depth.py -l ckpt/K_Dynamo-Depth_MD2 --depth_model monodepthv2 -d kitti
+python3 eval/depth.py -l ckpt/                                  ## please fill out the form for ckpt!!
+python3 eval/depth.py -l ckpt/ --depth_model monodepthv2    ## please fill out the form for ckpt!!
+python3 eval/depth.py -l ckpt/ -d nuscenes
+python3 eval/depth.py -l ckpt/ --depth_model monodepthv2 -d nuscenes
+python3 eval/depth.py -l ckpt/ -d kitti
+python3 eval/depth.py -l ckpt/ --depth_model monodepthv2 -d kitti
 ```
-
-|     Model     |   Dataset |  Abs Rel  |   Sq Rel  |    RMSE   |  RMSE log | delta < 1.25 | delta < 1.25<sup>2</sup> | delta < 1.25<sup>3</sup> |
-|:-------------------------:|:------:|:---------:|:---------:|:---------:|:---------:|:------------:|:--------------:|:--------------:|
-|  [K_Dynamo-Depth_MD2](https://drive.google.com/file/d/1SLQcCQplfAtqeWUD4TQc42aGpevViTGX/view?usp=sharing)  |  KITTI  | 0.120  |  0.864  |  4.850  |  0.195  |  0.858  |  0.956  |  0.982   |
-|  [K_Dynamo-Depth](https://drive.google.com/file/d/1b1kwxqUquFbSMU9WLAr6_pIbj1HxoWLJ/view?usp=share_link)(*)  |  KITTI   | 0.112  |  0.768  |  4.528  |  0.184  |  0.874  |  0.961  |  0.984   |
-|  [N_Dynamo-Depth_MD2](https://drive.google.com/file/d/1t0Z_2hD0raAi4vDK_VZFXIcwcTFx0elU/view?usp=sharing)  |  nuScenes  |  0.193  |  2.285  |  7.357  |  0.287  |  0.765  |  0.885  |  0.935  |
-|  [N_Dynamo-Depth](https://drive.google.com/file/d/1oqQVFyGxo_SxclpinrBlwGSE1gEfVAZY/view?usp=sharing)  |  nuScenes   |  0.179  |  2.118  |  7.050  |  0.271  |  0.787  |  0.896  |  0.940  |
-|  W_Dynamo-Depth_MD2(†)  |  Waymo  |  0.130  |  1.439  |  6.646  |  0.183  |  0.851  |  0.959  |  0.985  |
-|  W_Dynamo-Depth(†)  |  Waymo   | 0.116  |  1.156  |  6.000  |  0.166  |  0.878  |  0.969  |  0.989   |
-
 (*) Very minor differences compared to the results in the paper. Rest of the checkpoints are consistent with the paper.  
 (†) Please refer to the note above for obtaining access to the models trained on Waymo Open Dataset.
 
