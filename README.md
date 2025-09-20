@@ -150,4 +150,64 @@ wget https://storage.googleapis.com/niantic-lon-static/research/manydepth/gt_dep
 unzip gt_depths_cityscapes.zip
 cd ../..
 
+## Training
+Training can be done with a single GPU or multiple GPUs (via `torch.nn.parallel.DistributedDataParallel`)
+
+The following are a set of shared arguments to use with any training method.
+- `-n <EXP_NAME>` indicates the name of the experiment.
+- `-d <DATASET_NAME>` specifies which dataset (`"waymo"`, `"nuscenes"`, or `"kitti"`) to train on, and the default is `"waymo"`.
+- `-l </PATH/TO/MODEL/CKPT>` indicates which model checkpoint to be load before training.
+- `--depth_model <MODEL_NAME>` specifies which depth model (`"litemono"` or `"monodepthv2"`) to train, with default `"litemono"`.
+
+### ⏳ Single GPU Training
+For instance, to train w/ 1 GPU on Cityscapes Dataset from scratch:
+```
+python3 train.py --data_path /path-to-cityscapes  --dataset cityscapes --model_name model_name --width 512 --height 192 --freeze_teacher_epoch 15 --train_ref_epoch 20 --train_rigid_flow_epoch 15 --model_choice litemono --model_choicee_ref litemono --model lite-mono --model_ref lite-mono-8m
+```
+
+### ⏳ Multi-GPU Training
+For instance, to train w/ 2 GPUs on Waymo Dataset
+```
+CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.launch --nproc_per_node=2 train.py --data_path /path-to-cityscapes  --dataset cityscapes --model_name model_name --width 512 --height 192 --freeze_teacher_epoch 15 --train_ref_epoch 20 --train_rigid_flow_epoch 15 --model_choice litemono --model_choicee_ref litemono --model lite-mono --model_ref lite-mono-8m
+```
+
+
+## Evaluation
+Scripts for evaluation are found in `eval/`, including [depth](eval/depth.py), [motion segmentation](eval/motion_segmentation.py), [odometry](eval/odometry.py), and [visualization](eval/visualize.py).
+
+The following are a set of shared arguments to use with any of the evaluation scripts above.
+- `-l </PATH/TO/MODEL/CKPT>` indicates which model checkpoint to be evaluated.
+- `--depth_model <MODEL_NAME>` specifies which depth model (`"litemono"` or `"monodepthv2"`) to use, with default `"litemono"`.
+- `-d <DATASET_NAME>` specifies which dataset (`"waymo"`, `"nuscenes"`, or `"kitti"`) to evaluate on, and the default is `"waymo"`.
+- `--eval_dir` defines the output directory where the results would be saved, with default `"./outputs"`.
+
+**Note**: To access the trained models for Waymo Open, please fill out the [Google Form](https://forms.gle/nRezg2gr7QDXJGcA9), and [raise an issue](https://github.com/YihongSun/Dynamo-Depth/issues/new) if we don't get back to you in two days. Please note that Waymo open dataset is under strict non-commercial license so we are not allowed to share the model with you if it will used for any profit-oriented activities.
+
+### 📊 Depth
+[eval/depth.py](eval/depth.py) evaluates monocular depth estimation, with results saved in `./outputs/<CKPT>_<DATASET>/depth/`.
+
+🔹 To replicate the results reported in the paper (Table 1 and 2), run the following lines. 
+```
+## === Missing checkpoints will be downloaded automatically === ##
+
+python3 eval/depth.py -l ckpt/W_Dynamo-Depth                                  ## please fill out the form for ckpt!!
+python3 eval/depth.py -l ckpt/W_Dynamo-Depth_MD2 --depth_model monodepthv2    ## please fill out the form for ckpt!!
+python3 eval/depth.py -l ckpt/N_Dynamo-Depth -d nuscenes
+python3 eval/depth.py -l ckpt/N_Dynamo-Depth_MD2 --depth_model monodepthv2 -d nuscenes
+python3 eval/depth.py -l ckpt/K_Dynamo-Depth -d kitti
+python3 eval/depth.py -l ckpt/K_Dynamo-Depth_MD2 --depth_model monodepthv2 -d kitti
+```
+
+|     Model     |   Dataset |  Abs Rel  |   Sq Rel  |    RMSE   |  RMSE log | delta < 1.25 | delta < 1.25<sup>2</sup> | delta < 1.25<sup>3</sup> |
+|:-------------------------:|:------:|:---------:|:---------:|:---------:|:---------:|:------------:|:--------------:|:--------------:|
+|  [K_Dynamo-Depth_MD2](https://drive.google.com/file/d/1SLQcCQplfAtqeWUD4TQc42aGpevViTGX/view?usp=sharing)  |  KITTI  | 0.120  |  0.864  |  4.850  |  0.195  |  0.858  |  0.956  |  0.982   |
+|  [K_Dynamo-Depth](https://drive.google.com/file/d/1b1kwxqUquFbSMU9WLAr6_pIbj1HxoWLJ/view?usp=share_link)(*)  |  KITTI   | 0.112  |  0.768  |  4.528  |  0.184  |  0.874  |  0.961  |  0.984   |
+|  [N_Dynamo-Depth_MD2](https://drive.google.com/file/d/1t0Z_2hD0raAi4vDK_VZFXIcwcTFx0elU/view?usp=sharing)  |  nuScenes  |  0.193  |  2.285  |  7.357  |  0.287  |  0.765  |  0.885  |  0.935  |
+|  [N_Dynamo-Depth](https://drive.google.com/file/d/1oqQVFyGxo_SxclpinrBlwGSE1gEfVAZY/view?usp=sharing)  |  nuScenes   |  0.179  |  2.118  |  7.050  |  0.271  |  0.787  |  0.896  |  0.940  |
+|  W_Dynamo-Depth_MD2(†)  |  Waymo  |  0.130  |  1.439  |  6.646  |  0.183  |  0.851  |  0.959  |  0.985  |
+|  W_Dynamo-Depth(†)  |  Waymo   | 0.116  |  1.156  |  6.000  |  0.166  |  0.878  |  0.969  |  0.989   |
+
+(*) Very minor differences compared to the results in the paper. Rest of the checkpoints are consistent with the paper.  
+(†) Please refer to the note above for obtaining access to the models trained on Waymo Open Dataset.
+
 
