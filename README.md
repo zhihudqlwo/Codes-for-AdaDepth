@@ -166,25 +166,18 @@ CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.launch --nproc_per_node=2 t
 ```
 
 ## Evaluation
-Scripts for evaluation are found in `eval/`, including [depth](eval/depth.py), [motion segmentation](eval/motion_segmentation.py), [odometry](eval/odometry.py), and [visualization](eval/visualize.py).
-
-The following are a set of shared arguments to use with any of the evaluation scripts above.
-- `-l </PATH/TO/MODEL/CKPT>` indicates which model checkpoint to be evaluated.
-- `--depth_model <MODEL_NAME>` specifies which depth model (`"litemono"` or `"monodepthv2"`) to use, with default `"litemono"`.
-- `-d <DATASET_NAME>` specifies which dataset (`"waymo"`, `"nuscenes"`, or `"kitti"`) to evaluate on, and the default is `"waymo"`.
-- `--eval_dir` defines the output directory where the results would be saved, with default `"./outputs"`.
-
-**Note**: To access the trained models for Waymo Open, please fill out the [Google Form](https://forms.gle/nRezg2gr7QDXJGcA9), and [raise an issue](https://github.com/YihongSun/Dynamo-Depth/issues/new) if we don't get back to you in two days. Please note that Waymo open dataset is under strict non-commercial license so we are not allowed to share the model with you if it will used for any profit-oriented activities.
-
+Scripts for evaluation are found in `eval/`, including [depth](eval/depth.py).
 ### 📊 Depth
+```
 [eval/depth.py](eval/depth.py) evaluates monocular depth estimation, with results saved in `./outputs/<CKPT>_<DATASET>/depth/`.
-
+```
 🔹 To replicate the results reported in the paper (Table 1 and 2), run the following lines. 
 ```
 ## === Missing checkpoints will be downloaded automatically === ##
-
+```
 ./disp_evaluation_cs.sh
 ./disp_evaluation_kitti.sh
+```
 ```
 
 |     Model     |   Dataset |  Abs Rel  |   Sq Rel  |    RMSE   |  RMSE log | delta < 1.25 | delta < 1.25<sup>2</sup> | delta < 1.25<sup>3</sup> |
