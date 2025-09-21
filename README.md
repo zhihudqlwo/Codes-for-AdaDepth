@@ -169,14 +169,15 @@ CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.launch --nproc_per_node=2 t
 Scripts for evaluation are found in `eval/`, including [depth](eval/depth.py).
 ### 📊 Depth
 ```
-[eval/depth.py](eval/depth.py) evaluates monocular depth estimation, with results saved in `./outputs/<CKPT>_<DATASET>/depth/`.
+[evaluate_depth.py](evaluate_depth.py) evaluates monocular depth estimation, with results saved in `./outputs/<CKPT>_<DATASET>/depth/`.
 ```
 🔹 To replicate the results reported in the paper (Table 1 and 2), run the following lines. 
 ## === Missing checkpoints will be downloaded automatically === ##
 ```
-./disp_evaluation_cs.sh
-./disp_evaluation_kitti.sh
+./disp_evaluation_cs.sh。 # Evaluate on Cityscapes
+./disp_evaluation_kitti.sh  # Evaluate on KITTI
 ```
+To test on the Waymo dataset, you can first download pretrained checkpoints from our [Github Release] ()
 
 |     Model     |   Dataset |  Abs Rel  |   Sq Rel  |    RMSE   |  RMSE log | delta < 1.25 | delta < 1.25<sup>2</sup> | delta < 1.25<sup>3</sup> |
 |:-------------------------:|:------:|:---------:|:---------:|:---------:|:---------:|:------------:|:--------------:|:--------------:|
