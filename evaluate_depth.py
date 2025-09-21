@@ -17,7 +17,6 @@ import requests
 from tqdm import tqdm
 
 def download_file(url, save_path):
-    """下载文件并带进度条"""
     if os.path.exists(save_path):
         print(f"✔ Found {save_path}, skip downloading")
         return save_path
@@ -157,8 +156,8 @@ def load_model(args):
     decoder_path = os.path.join(args.pretrained_path, "depth_ref.pth")
 
     # 如果本地不存在
-    encoder_url = "https://github.com/zhihudqlwo/Codes-for-AdaDepth/releases/download/v1.0/encoder_ref.pth"
-    decoder_url = "https://github.com/zhihudqlwo/Codes-for-AdaDepth/releases/download/v1.0/depth_ref.pth"
+    encoder_url = "https://github.com/zhihudqlwo/Codes-for-AdaDepth/releases/download/ckpt/cs_encoder_ref.pth"
+    decoder_url = "https://github.com/zhihudqlwo/Codes-for-AdaDepth/releases/download/ckpt/cs_depth_ref.pth"
 
     encoder_path = download_file(encoder_url, encoder_path)
     decoder_path = download_file(decoder_url, decoder_path)
@@ -169,7 +168,6 @@ def load_model(args):
     encoder_dict = torch.load(encoder_path, map_location='cuda')
     decoder_dict = torch.load(decoder_path, map_location='cuda')
 
-    # 初始化模型
     if args.backbone == "resnet":
         depth_encoder = networks.ResnetEncoder(args.num_layers, False)
         depth_decoder = networks.DepthDecoder(depth_encoder.num_ch_enc, scales=range(1))
