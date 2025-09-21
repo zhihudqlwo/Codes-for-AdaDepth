@@ -198,10 +198,8 @@ python3 eval/depth.py \
 |  [AdaDepth_LiteMono-8M]  |  KITTI   | 0.104  |  0.749  |  4.491  |  0.178  |  0.891  |  0.965  |  0.983   |
 |  [AdaDepth_MD2]  |  Waymo  |  0.130  |  1.531  |  6.403  |  0.180  |  0.869  |  0.964  |  0.985  |
 |  [AdaDepth]  |  Waymo   |  0.112  |  1.145  |  6.025  |  0.166  |  0.885  |  0.969  |  0.989  |
-|  AdaDepth_MD2  |  Cityscapes  |  0.097  |  0.940  |  5.743  |  0.149  |  0.903  |  0.975  |  0.992  |
-|  AdaDepth  |  Cityscapes   | 0.085  |  0.736  |  5.213  |  0.138  |  0.918  |  0.980  |  0.993   |
+|  [AdaDepth_MD2]  |  Cityscapes  |  0.097  |  0.940  |  5.743  |  0.149  |  0.903  |  0.975  |  0.992  |
+|  [AdaDepth]  |  Cityscapes   | 0.085  |  0.736  |  5.213  |  0.138  |  0.918  |  0.980  |  0.993   |
 
-(*) Very minor differences compared to the results in the paper. Rest of the checkpoints are consistent with the paper.  
-(†) Please refer to the note above for obtaining access to the models trained on Waymo Open Dataset.
 
 
