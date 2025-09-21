@@ -177,8 +177,6 @@ Scripts for evaluation are found in `eval/`, including [depth](eval/depth.py).
 ```
 ./disp_evaluation_cs.sh
 ./disp_evaluation_kitti.sh
-```
-```
 
 |     Model     |   Dataset |  Abs Rel  |   Sq Rel  |    RMSE   |  RMSE log | delta < 1.25 | delta < 1.25<sup>2</sup> | delta < 1.25<sup>3</sup> |
 |:-------------------------:|:------:|:---------:|:---------:|:---------:|:---------:|:------------:|:--------------:|:--------------:|
