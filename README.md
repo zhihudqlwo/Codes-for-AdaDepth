@@ -180,6 +180,17 @@ Scripts for evaluation are found in `eval/`, including [depth](eval/depth.py).
 
 To test on the Waymo dataset, you can first download pretrained checkpoints from our [GitHub Release encoder](https://github.com/zhihudqlwo/Codes-for-AdaDepth/releases/download/ckpt_waymo/depth_enc.pth) and [GitHub Release decoder](https://github.com/zhihudqlwo/Codes-for-AdaDepth/releases/download/ckpt_waymo/depth_dec.pth).
 
+Then use the eval/depth.py script from [Dynamo-Depth](https://dynamo-depth.github.io) to run evaluation:
+```
+python3 eval/depth.py \
+    -l ./checkpoints/your_checkpoint \
+    -d waymo \
+    --data_path /path/to/waymo_dataset \
+    --height 320 \
+    --width 480  \
+    --train_img_type original 
+```
+
 
 |     Model     |   Dataset |  Abs Rel  |   Sq Rel  |    RMSE   |  RMSE log | delta < 1.25 | delta < 1.25<sup>2</sup> | delta < 1.25<sup>3</sup> |
 |:-------------------------:|:------:|:---------:|:---------:|:---------:|:---------:|:------------:|:--------------:|:--------------:|
