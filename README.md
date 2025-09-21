@@ -177,9 +177,9 @@ Scripts for evaluation are found in `eval/`, including [depth](eval/depth.py).
 ./disp_evaluation_cs.sh。 # Evaluate on Cityscapes
 ./disp_evaluation_kitti.sh  # Evaluate on KITTI
 ```
-```
+
 To test on the Waymo dataset, you can first download pretrained checkpoints from our [GitHub Release encoder](https://github.com/zhihudqlwo/Codes-for-AdaDepth/releases/download/ckpt_waymo/depth_enc.pth) and [GitHub Release decoder](https://github.com/zhihudqlwo/Codes-for-AdaDepth/releases/download/ckpt_waymo/depth_dec.pth).
-```
+
 
 |     Model     |   Dataset |  Abs Rel  |   Sq Rel  |    RMSE   |  RMSE log | delta < 1.25 | delta < 1.25<sup>2</sup> | delta < 1.25<sup>3</sup> |
 |:-------------------------:|:------:|:---------:|:---------:|:---------:|:---------:|:------------:|:--------------:|:--------------:|
