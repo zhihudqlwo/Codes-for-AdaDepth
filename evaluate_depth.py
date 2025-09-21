@@ -371,8 +371,10 @@ def test_cityscapes(args, dataloader, depth_encoder, depth_decoder):
     mean_errors = torch.tensor(errors).mean(0)
     mean_errors_obj = torch.tensor(errors_obj).mean(0)
 
+    print("=== Depth Estimation on All Regions ===")
     print(("{:>8} | " * 7).format("abs_rel", "sq_rel", "rmse", "rmse_log", "a1", "a2", "a3"))
     print(("{: 8.3f} | " * 7 + "\n").format(*mean_errors.tolist()))  
+    print("=== Depth Estimation on Dynamic Classes ===")
     print(("{:>8} | " * 7).format("abs_rel", "sq_rel", "rmse", "rmse_log", "a1", "a2", "a3"))
     print(("{: 8.3f} | " * 7 + "\n").format(*mean_errors_obj.tolist()))  
 
