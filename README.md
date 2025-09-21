@@ -149,7 +149,7 @@ cd splits/cityscapes/
 wget https://storage.googleapis.com/niantic-lon-static/research/manydepth/gt_depths_cityscapes.zip
 unzip gt_depths_cityscapes.zip
 cd ../..
-
+```
 ## Training
 Training can be done with a single GPU or multiple GPUs (via `torch.nn.parallel.DistributedDataParallel`)
 
@@ -172,12 +172,12 @@ Scripts for evaluation are found in `eval/`, including [depth](eval/depth.py).
 [eval/depth.py](eval/depth.py) evaluates monocular depth estimation, with results saved in `./outputs/<CKPT>_<DATASET>/depth/`.
 ```
 🔹 To replicate the results reported in the paper (Table 1 and 2), run the following lines. 
-```
 ## === Missing checkpoints will be downloaded automatically === ##
+```
 ./disp_evaluation_cs.sh
 ./disp_evaluation_kitti.sh
 ```
-```
+
 |     Model     |   Dataset |  Abs Rel  |   Sq Rel  |    RMSE   |  RMSE log | delta < 1.25 | delta < 1.25<sup>2</sup> | delta < 1.25<sup>3</sup> |
 |:-------------------------:|:------:|:---------:|:---------:|:---------:|:---------:|:------------:|:--------------:|:--------------:|
 |  [AdaDepth_MD2]  |  KITTI  | 0.113  |  0.852  |  4.779  |  0.189  |  0.879  |  0.961  |  0.982   |
